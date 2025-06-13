@@ -1,0 +1,17 @@
+{
+  "name": "ia-tpalumnos-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@llamaindex/ollama": "^0.1.10",
+    "llamaindex": "^0.11.8",
+    "zod": "^3.25.64"
+  }
+}
