@@ -34,58 +34,58 @@ const ollamaLLM = new Ollama({
 // TODO: Implementar la Tool para buscar por nombre
 const buscarPorNombreTool = tool({
     name: "buscarPorNombre",
-    description: "Usa esta función para encontrar estudiantes por su nombre",
+    description: "Busca estudiantes por nombre",
     parameters: z.object({
-      nombre: z.string().describe("El nombre del estudiante a buscar"),
+      nombre: z.string(),
     }),
     execute: ({ nombre }) => {
-      const resultados = estudiantes.buscarEstudiantePorNombre(nombre);
-      if (resultados.length === 0) {
-        return `No se encontraron estudiantes con el nombre "${nombre}".`;
+      const lista = estudiantes.buscarEstudiantePorNombre(nombre);
+      if (lista.length === 0) {
+        return "No se encontró ningún estudiante con ese nombre.";
       }
-      return resultados.map(e => `${e.nombre} ${e.apellido} - Curso: ${e.curso}`).join('\n');
+      return lista.map(e => `${e.nombre} ${e.apellido} - ${e.curso}`).join("\n");
     },
   });
   
   const buscarPorApellidoTool = tool({
     name: "buscarPorApellido",
-    description: "Usa esta función para encontrar estudiantes por su apellido",
+    description: "Busca estudiantes por apellido",
     parameters: z.object({
-      apellido: z.string().describe("El apellido del estudiante a buscar"),
+      apellido: z.string(),
     }),
     execute: ({ apellido }) => {
-      const resultados = estudiantes.buscarEstudiantePorApellido(apellido);
-      if (resultados.length === 0) {
-        return `No se encontraron estudiantes con el apellido "${apellido}".`;
+      const lista = estudiantes.buscarEstudiantePorApellido(apellido);
+      if (lista.length === 0) {
+        return "No se encontró ningún estudiante con ese apellido.";
       }
-      return resultados.map(e => `${e.nombre} ${e.apellido} - Curso: ${e.curso}`).join('\n');
+      return lista.map(e => `${e.nombre} ${e.apellido} - ${e.curso}`).join("\n");
     },
   });
   
   const agregarEstudianteTool = tool({
     name: "agregarEstudiante",
-    description: "Usa esta función para agregar un nuevo estudiante",
+    description: "Agrega un nuevo estudiante",
     parameters: z.object({
-      nombre: z.string().describe("El nombre del estudiante"),
-      apellido: z.string().describe("El apellido del estudiante"),
-      curso: z.string().describe("El curso del estudiante (ej: 4A, 4B, 5A)"),
+      nombre: z.string(),
+      apellido: z.string(),
+      curso: z.string(),
     }),
     execute: ({ nombre, apellido, curso }) => {
-      const nuevo = estudiantes.agregarEstudiante(nombre, apellido, curso);
-      return `✅ Estudiante agregado: ${nuevo.nombre} ${nuevo.apellido} - Curso: ${nuevo.curso}`;
+      estudiantes.agregarEstudiante(nombre, apellido, curso);
+      return "Estudiante agregado correctamente.";
     },
   });
   
   const listarEstudiantesTool = tool({
     name: "listarEstudiantes",
-    description: "Usa esta función para mostrar todos los estudiantes",
+    description: "Muestra todos los estudiantes",
     parameters: z.object({}),
     execute: () => {
-      const lista = estudiantes.listarEstudiantes();
-      if (lista.length === 0) {
-        return "No hay estudiantes registrados.";
+      const todos = estudiantes.listarEstudiantes();
+      if (todos.length === 0) {
+        return "No hay estudiantes cargados.";
       }
-      return lista.map(e => `${e.nombre} ${e.apellido} - Curso: ${e.curso}`).join('\n');
+      return todos.map(e => `${e.nombre} ${e.apellido} - ${e.curso}`).join("\n");
     },
   });
 

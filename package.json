@@ -2,16 +2,18 @@
   "name": "ia-tpalumnos-1",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js"
+    "start": "node src/main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@llamaindex/ollama": "^0.1.10",
+    "@llamaindex/workflow": "^1.1.9",
     "llamaindex": "^0.11.8",
     "zod": "^3.25.64"
   }

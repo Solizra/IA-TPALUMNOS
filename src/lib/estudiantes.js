@@ -1,4 +1,3 @@
-// Gestión de estudiantes
 import { readFileSync, writeFileSync } from 'fs';
 
 const DATA_FILE = './data/alumnos.json';
@@ -10,10 +9,10 @@ class Estudiantes {
   
   cargarEstudiantesDesdeJson() {
     try {
-      const data = JSON.parse(readFileSync(DATA_FILE, 'utf-8'));
-      this.estudiantes = data.alumnos || [];
+        const data = JSON.parse(readFileSync(DATA_FILE, 'utf-8'));
+        this.estudiantes = data.alumnos || [];
     } catch (e) {
-      console.error("Error al leer el archivo de datos:", e);
+        console.error("Error al leer el archivo de datos:", e);
     }
   }
 
@@ -28,27 +27,16 @@ class Estudiantes {
   }
 
   agregarEstudiante(nombre, apellido, curso) {
-    const nuevo = {
-      id: this.estudiantes.length + 1,
-      nombre,
-      apellido,
-      curso
-    };
-    this.estudiantes.push(nuevo);
+    this.estudiantes.push({ nombre, apellido, curso });
     this.guardarEstudiantes();
-    return nuevo;
   }
 
   buscarEstudiantePorNombre(nombre) {
-    return this.estudiantes.filter(e =>
-      e.nombre.toLowerCase().includes(nombre.toLowerCase())
-    );
+    return this.estudiantes.filter(e => e.nombre.toLowerCase().includes(nombre.toLowerCase()));
   }
 
   buscarEstudiantePorApellido(apellido) {
-    return this.estudiantes.filter(e =>
-      e.apellido.toLowerCase().includes(apellido.toLowerCase())
-    );
+    return this.estudiantes.filter(e => e.apellido.toLowerCase().includes(apellido.toLowerCase()));
   }
 
   listarEstudiantes() {
@@ -56,4 +44,4 @@ class Estudiantes {
   }
 }
 
-export { Estudiantes }
+export { Estudiantes };
